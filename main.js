@@ -1,40 +1,25 @@
-var authorization = "Bearer ***"; // replace by authorization value
+var authorization = "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"; // replace by authorization value
 var ua = navigator.userAgentData.brands.map(brand => `"${brand.brand}";v="${brand.version}"`).join(', ');
-var client_tid = "***"; // replace by X-Client-Transaction-Id value
-var client_uuid = "***"; // replace by X-Client-Uuid value
+var client_tid = "ZF2bvDhfnEBVgvKVXoY4+VTKwtzrXR7kZX5yM5BqHh2muGW6qR/yAC9RgKeDptryFlyZg2ePxo60Bq/6wSYsxzGza562Zw"; // replace by X-Client-Transaction-Id value
+var client_uuid = "765371ccda1d9468df101e3e4b1e1794253be53841cd3d26c3a6a15e9bbe12f133dacf3944847ee9e9b7587d3df3c2d0a1a354cecc7e47af51e1440f5cda82fe0b3a64b44294eb4a65b43dc1403db47d"; // replace by X-Client-Uuid value
 var csrf_token = getCookie("ct0");
 var random_resource = "uYU5M2i12UhDvDTzN6hZPg";
 var random_resource_old_tweets = "H8OOoI-5ZE4NxgRr8lfyWg"
 var language_code = navigator.language.split("-")[0]
 var tweets_to_delete = []
 var user_id = getCookie("twid").substring(4);
-var username = "YourUsernameHere" // replace with your username
+var username = "niermika" // replace with your username
 var stop_signal = undefined
 var twitter_archive_content = undefined
 var twitter_archive_loading_confirmed = false
 
-var delete_options = {
-	/*  from_archive: If you downloaded your archive from Twitter, set this to true.
-	    You will be prompt to upload the tweets.js file from it.
-		Advantage is that this is much more reliable and faster.
-		You can combine this with options: unretweet, match_any_keywords, tweets_to_ignore, after/before date
-		others will be ignored
-	 */
-	"from_archive":false,
-	/*  unretweet: seems obvious, but it unretweet if set to true */
-	"unretweet":false,
-	/* do_not_remove_pinned_tweet: THIS CAN FAIL. Twitter has too many different way to format their response that I cannot guarantee this to work 100%
-	   It should work for newer tweets. HOWEVER, use the "tweets_to_ignore" below and put in your pinned tweet ID, this will work 100%.
-	   'why do you make this option then', this is a safeguard for people that forgot to add their pinned tweet in the ignore list.
-	*/
-	"do_not_remove_pinned_tweet":true,
-	/* delete_message_with_url_only: self explanatory, but will delete tweets that contain links */
-	"delete_message_with_url_only":false,
-	/* delete_specific_ids_only: Array of tweet IDs that the script will delete. The script will not delete anything else than these IDs. Any other option will be ignored.
+var delete_options = {	
+"delete_message_with_url_only":false,
+        /* delete_specific_ids_only: Array of tweet IDs that the script will delete. The script will not delete anything else than these IDs. Any other option will be ignored.
 	   a tweet id is the number you see on the right of the url: https://x.com/USERNAME/status/1695001000000000
 	   an example of how the array can look like : ["1695001000000000", "1303001000000000"] don't forget the quotes ""
 	*/
-	"delete_specific_ids_only":[""],
+	"delete_specific_ids_only":false,
 	/*
 		match_any_keywords : if any of the strings is found, delete the tweet. It's OR not AND. Example : ["hello", "hi", "yo"]
 		if no words are given, it will match all. Can be combined with delete_message_with_url_only
